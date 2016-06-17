@@ -31,7 +31,7 @@ Done. See ./output/report.html
 * Review the dry run report, ./output/report.html
 
 * Add your data, replace the following files with your own
-  * ./input/test.wav  (.wav, .flac and .ogg are supported)
+  * ./input/test.wav  (.wav, .flac and .ogg are supported, 100MB size limit)
   * ./input/transcript-ground-truth.txt
   * ./input/transcript-competitor.txt
 
