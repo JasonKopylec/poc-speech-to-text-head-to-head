@@ -12,8 +12,13 @@ It uses the IBM Watson SDK and [jsdifflib](https://github.com/cemerick/jsdifflib
 > cd poc-speech-to-text-head-to-head
 > npm install
 ```
-2. Edit the config file, /input/config.json  (note: this assumes you have already subscribed to the IBM Watson Speech-to-Text 
-- Add user/pass for the Watson Speech-to-Text Service (these are the service-specific credentials, not your personal Bluemix credentials)
+2. Add your Watson Speech-to-Text credentials to /input/config.json  (note: this assumes you have already subscribed to the IBM Watson Speech-to-Text service)
+```
+{
+  "watsonSpeechToTextUser": "EDIT_USERNAME",
+  "watsonSpeechToTextPass": "EDIT_PASSWORD",
+  ...
+```
 3. Run the sample file (/input/test.wav) as a dry run, takes about a minute to run
 ```
 > node app.js
