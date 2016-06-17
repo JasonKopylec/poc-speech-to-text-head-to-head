@@ -12,37 +12,28 @@ It uses the IBM Watson SDK and [jsdifflib](https://github.com/cemerick/jsdifflib
 > cd poc-speech-to-text-head-to-head
 > npm install
 ```
-
 2. Edit the config file, /input/config.json  (note: this assumes you have already subscribed to the IBM Watson Speech-to-Text 
 - Add user/pass for the Watson Speech-to-Text Service (these are the service-specific credentials, not your personal Bluemix credentials)
-
 3. Run the sample file (/input/test.wav) as a dry run, takes about a minute to run
 ```
 > node app.js
-```
 Output:
-```
 Calling Watson Speech-to-Text API for file ./input/test.wav
 Done. See ./output/report.html
 ```
-
 4. Review the dry run report, ./output/report.html
-
 5. Add your data, replace the following files with your own
 - ./input/test.wav  (.wav, .flac and .ogg are supported)
 - ./input/transcript-ground-truth.txt
 - ./input/transcript-competitor.txt
-
 6. Delete everything in the ./output folder (this needs to be repeated between runs)
 ```
 > rm ./output/*
 ```
-
 7. Run the app  (this will take a while, on average about 50-75% of the time of your recording)
 ```
 > node app.js
 ```
-
 8. Review the real report, ./output/report.html
 
 
