@@ -1,0 +1,87 @@
+<html>
+<head>
+
+    <!-- To make the report stand-alone, JS dependencies are included inline. See originals at https://github.com/cemerick/jsdifflib -->
+
+    <!-- difflib.js -->
+    <script>
+        var __whitespace={" ":!0,"	":!0,"\n":!0,"\f":!0,"":!0},difflib={defaultJunkFunction:function(t){return __whitespace.hasOwnProperty(t)},stripLinebreaks:function(t){return t.replace(/^[\n]*|[\n]*$/g,"")},stringAsLines:function(t){for(var i=t.indexOf("\n"),n=t.indexOf(""),e=i>-1&&n>-1||0>n?"\n":"",s=t.split(e),h=0;h<s.length;h++)s[h]=difflib.stripLinebreaks(s[h]);return s},__reduce:function(t,i,n){if(null!=n)var e=n,s=0;else{if(!i)return null;var e=i[0],s=1}for(;s<i.length;s++)e=t(e,i[s]);return e},__ntuplecomp:function(t,i){for(var n=Math.max(t.length,i.length),e=0;n>e;e++){if(t[e]<i[e])return-1;if(t[e]>i[e])return 1}return t.length==i.length?0:t.length<i.length?-1:1},__calculate_ratio:function(t,i){return i?2*t/i:1},__isindict:function(t){return function(i){return t.hasOwnProperty(i)}},__dictget:function(t,i,n){return t.hasOwnProperty(i)?t[i]:n},SequenceMatcher:function(t,i,n){this.set_seqs=function(t,i){this.set_seq1(t),this.set_seq2(i)},this.set_seq1=function(t){t!=this.a&&(this.a=t,this.matching_blocks=this.opcodes=null)},this.set_seq2=function(t){t!=this.b&&(this.b=t,this.matching_blocks=this.opcodes=this.fullbcount=null,this.__chain_b())},this.__chain_b=function(){for(var t=this.b,i=t.length,n=this.b2j={},e={},s=0;s<t.length;s++){var h=t[s];if(n.hasOwnProperty(h)){var r=n[h];i>=200&&100*r.length>i?(e[h]=1,delete n[h]):r.push(s)}else n[h]=[s]}for(var h in e)e.hasOwnProperty(h)&&delete n[h];var a=this.isjunk,u={};if(a){for(var h in e)e.hasOwnProperty(h)&&a(h)&&(u[h]=1,delete e[h]);for(var h in n)n.hasOwnProperty(h)&&a(h)&&(u[h]=1,delete n[h])}this.isbjunk=difflib.__isindict(u),this.isbpopular=difflib.__isindict(e)},this.find_longest_match=function(t,i,n,e){for(var s,h=this.a,r=this.b,a=this.b2j,u=this.isbjunk,l=t,o=n,f=0,c=null,_={},b=[],g=t;i>g;g++){var p={},d=difflib.__dictget(a,h[g],b);for(var m in d)if(d.hasOwnProperty(m)){if(c=d[m],n>c)continue;if(c>=e)break;p[c]=s=difflib.__dictget(_,c-1,0)+1,s>f&&(l=g-s+1,o=c-s+1,f=s)}_=p}for(;l>t&&o>n&&!u(r[o-1])&&h[l-1]==r[o-1];)l--,o--,f++;for(;i>l+f&&e>o+f&&!u(r[o+f])&&h[l+f]==r[o+f];)f++;for(;l>t&&o>n&&u(r[o-1])&&h[l-1]==r[o-1];)l--,o--,f++;for(;i>l+f&&e>o+f&&u(r[o+f])&&h[l+f]==r[o+f];)f++;return[l,o,f]},this.get_matching_blocks=function(){if(null!=this.matching_blocks)return this.matching_blocks;for(var t,i,n,e,s,h,r,a,u,l=this.a.length,o=this.b.length,f=[[0,l,0,o]],c=[];f.length;)s=f.pop(),t=s[0],i=s[1],n=s[2],e=s[3],u=this.find_longest_match(t,i,n,e),h=u[0],r=u[1],a=u[2],a&&(c.push(u),h>t&&r>n&&f.push([t,h,n,r]),i>h+a&&e>r+a&&f.push([h+a,i,r+a,e]));c.sort(difflib.__ntuplecomp);var _,b,g,p=0,d=0,m=0,v=0,k=[];for(var q in c)c.hasOwnProperty(q)&&(v=c[q],_=v[0],b=v[1],g=v[2],p+m==_&&d+m==b?m+=g:(m&&k.push([p,d,m]),p=_,d=b,m=g));return m&&k.push([p,d,m]),k.push([l,o,0]),this.matching_blocks=k,this.matching_blocks},this.get_opcodes=function(){if(null!=this.opcodes)return this.opcodes;var t=0,i=0,n=[];this.opcodes=n;var e,s,h,r,a,u=this.get_matching_blocks();for(var l in u)u.hasOwnProperty(l)&&(e=u[l],s=e[0],h=e[1],r=e[2],a="",s>t&&h>i?a="replace":s>t?a="delete":h>i&&(a="insert"),a&&n.push([a,t,s,i,h]),t=s+r,i=h+r,r&&n.push(["equal",s,t,h,i]));return n},this.get_grouped_opcodes=function(t){t||(t=3);var i=this.get_opcodes();i||(i=[["equal",0,1,0,1]]);var n,e,s,h,r,a;"equal"==i[0][0]&&(n=i[0],e=n[0],s=n[1],h=n[2],r=n[3],a=n[4],i[0]=[e,Math.max(s,h-t),h,Math.max(r,a-t),a]),"equal"==i[i.length-1][0]&&(n=i[i.length-1],e=n[0],s=n[1],h=n[2],r=n[3],a=n[4],i[i.length-1]=[e,s,Math.min(h,s+t),r,Math.min(a,r+t)]);var u=t+t,l=[],o=[];for(var f in i)i.hasOwnProperty(f)&&(n=i[f],e=n[0],s=n[1],h=n[2],r=n[3],a=n[4],"equal"==e&&h-s>u&&(l.push([e,s,Math.min(h,s+t),r,Math.min(a,r+t)]),o.push(l),l=[],s=Math.max(s,h-t),r=Math.max(r,a-t)),l.push([e,s,h,r,a]));return!l||1==l.length&&"equal"==l[0][0]||o.push(l),o},this.ratio=function(){return matches=difflib.__reduce(function(t,i){return t+i[i.length-1]},this.get_matching_blocks(),0),difflib.__calculate_ratio(matches,this.a.length+this.b.length)},this.quick_ratio=function(){var t,i;if(null==this.fullbcount){this.fullbcount=t={};for(var n=0;n<this.b.length;n++)i=this.b[n],t[i]=difflib.__dictget(t,i,0)+1}t=this.fullbcount;for(var e={},s=difflib.__isindict(e),h=numb=0,n=0;n<this.a.length;n++)i=this.a[n],s(i)?numb=e[i]:numb=difflib.__dictget(t,i,0),e[i]=numb-1,numb>0&&h++;return difflib.__calculate_ratio(h,this.a.length+this.b.length)},this.real_quick_ratio=function(){var t=this.a.length,i=this.b.length;return _calculate_ratio(Math.min(t,i),t+i)},this.isjunk=n?n:difflib.defaultJunkFunction,this.a=this.b=null,this.set_seqs(t,i)}};
+    </script>
+
+    <!-- divview.js -->
+    <script>
+        diffview={buildView:function(e){function t(e,t){var n=document.createElement(e);return n.className=t,n}function n(e,t){var n=document.createElement(e);return n.appendChild(document.createTextNode(t)),n}function d(e,t,n){var d=document.createElement(e);return d.className=t,d.appendChild(document.createTextNode(n)),d}function a(e,a,i,l,h){return i>a?(e.appendChild(n("th",(a+1).toString())),e.appendChild(d("td",h,l[a].replace(/\t/g,"    "))),a+1):(e.appendChild(document.createElement("th")),e.appendChild(t("td","empty")),a)}function i(e,t,a,i,l){e.appendChild(n("th",null==t?"":(t+1).toString())),e.appendChild(n("th",null==a?"":(a+1).toString())),e.appendChild(d("td",l,i[null!=t?t:a].replace(/\t/g,"    ")))}var l=e.baseTextLines,h=e.newTextLines,p=e.opcodes,r=e.baseTextName?e.baseTextName:"Base Text",c=e.newTextName?e.newTextName:"New Text",o=e.contextSize,u=0==e.viewType||1==e.viewType?e.viewType:0;if(null==l)throw"Cannot build diff view; baseTextLines is not defined.";if(null==h)throw"Cannot build diff view; newTextLines is not defined.";if(!p)throw"Canno build diff view; opcodes is not defined.";var f=document.createElement("thead"),m=document.createElement("tr");f.appendChild(m),u?(m.appendChild(document.createElement("th")),m.appendChild(document.createElement("th")),m.appendChild(d("th","texttitle",r+" vs. "+c))):(m.appendChild(document.createElement("th")),m.appendChild(d("th","texttitle",r)),m.appendChild(document.createElement("th")),m.appendChild(d("th","texttitle",c))),f=[f];for(var s,C=[],g=0;g<p.length;g++){code=p[g],change=code[0];for(var v=code[1],w=code[2],b=code[3],x=code[4],T=Math.max(w-v,x-b),E=[],N=[],y=0;T>y;y++){if(o&&p.length>1&&(g>0&&y==o||0==g&&0==y)&&"equal"==change){var k=T-(0==g?1:2)*o;if(k>1){if(E.push(m=document.createElement("tr")),v+=k,b+=k,y+=k-1,m.appendChild(n("th","...")),u||m.appendChild(d("td","skip","")),m.appendChild(n("th","...")),m.appendChild(d("td","skip","")),g+1==p.length)break;continue}}E.push(m=document.createElement("tr")),u?"insert"==change?i(m,null,b++,h,change):"replace"==change?(N.push(s=document.createElement("tr")),w>v&&i(m,v++,null,l,"delete"),x>b&&i(s,null,b++,h,"insert")):"delete"==change?i(m,v++,null,l,change):i(m,v++,b++,l,change):(v=a(m,v,w,l,change),b=a(m,b,x,h,change))}for(var y=0;y<E.length;y++)C.push(E[y]);for(var y=0;y<N.length;y++)C.push(N[y])}C.push(m=d("th","author","diff view generated by ")),m.setAttribute("colspan",u?3:4),m.appendChild(s=n("a","jsdifflib")),s.setAttribute("href","http://github.com/cemerick/jsdifflib"),f.push(m=document.createElement("tbody"));for(var g in C)C.hasOwnProperty(g)&&m.appendChild(C[g]);m=t("table","diff"+(u?" inlinediff":""));for(var g in f)f.hasOwnProperty(g)&&m.appendChild(f[g]);return m}};
+    </script>
+
+    <!-- diffview.css -->
+    <style>
+        table.diff{border-collapse:collapse;border:1px solid #a9a9a9;white-space:pre-wrap}table.diff tbody{font-family:Courier,monospace}table.diff tbody th{font-family:verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;background:#EED;font-size:11px;font-weight:400;border:1px solid #BBC;color:#886;padding:.3em .5em .1em 2em;text-align:right;vertical-align:top}table.diff thead{border-bottom:1px solid #BBC;background:#EFEFEF;font-family:Verdana}table.diff thead th.texttitle{text-align:left}table.diff tbody td{padding:.4em .4em 0;vertical-align:top}table.diff .empty{background-color:#DDD}table.diff .replace{background-color:#FD8}table.diff .delete{background-color:#E99}table.diff .skip{background-color:#EFEFEF;border:1px solid #AAA;border-right:1px solid #BBC}table.diff .insert{background-color:#9E9}table.diff th.author{text-align:right;border-top:1px solid #BBC;background:#EFEFEF}
+    </style>
+
+    <!-- JQuery -->
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+        
+    <!-- Local Styles -->
+    <style>
+        .table { display: table; }
+        .table div { display: table-row; padding: 20px; }
+        .table div div { display: table-cell; }
+    </style>
+    
+    
+    <script>            
+        // Mock data
+        var data = {
+            "groundTruthTranscript":"to\nbe\nor\nnot\nto\nbe",
+            "watsonTranscript":"to\nbe\nor\nnot\ntwo\nbees",
+            "competitorTranscript":"too\nbee\nor\nnot\ntoo\nbee"
+        };
+
+        /// DATA PLACEHOLDER ///       
+    </script>
+</head>
+
+<body>
+    <h1>Speech-To-Text Head-to-Head Comparison</h1>
+    <div class="table">
+        <div>
+            <div id="watson"><h2>Watson</h2></div>
+            <div id="competitor"><h2>Competitor</h2></div>
+        </div>
+    </div>    
+</body>
+
+<script>
+
+function renderTranscriptAnalysis(parentDivId, groundTruthTranscript, testTranscript) {
+            // Modified from https://github.com/cemerick/jsdifflib
+
+            var parentDiv = $("#" + parentDivId);
+            if (!parentDiv) throw "Cannot find parent div " + parentDivId;
+            
+            var leftText = difflib.stringAsLines(groundTruthTranscript);
+            var rightText = difflib.stringAsLines(testTranscript);
+
+            var diffMatcher = new difflib.SequenceMatcher(leftText, rightText);
+
+            // Display the accuracy percentage
+            var accuracyPercent = diffMatcher.ratio();
+            parentDiv.append("<h3>Accuracy: " + Number(accuracyPercent * 100).toFixed(1) + "%</h3>");
+            
+            // Display the Diff View
+            var diffViewConfig = {
+                baseTextLines: leftText,
+                newTextLines: rightText,
+                opcodes: diffMatcher.get_opcodes(),
+                // set the display titles for each resource
+                baseTextName: "Ground Truth",
+                newTextName: "Speech-to-Text"
+            };
+            parentDiv.append(diffview.buildView(diffViewConfig));
+}
+
+renderTranscriptAnalysis("watson", data.groundTruthTranscript, data.watsonTranscript);
+renderTranscriptAnalysis("competitor", data.groundTruthTranscript, data.competitorTranscript);
+
+</script>
+</html>

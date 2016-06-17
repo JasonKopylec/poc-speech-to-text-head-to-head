@@ -1,0 +1,14 @@
+{
+  "watsonSpeechToTextUser": "EDIT_USERNAME",
+  "watsonSpeechToTextPass": "EDIT_PASSWORD",
+
+  "audioFilePath": "./input/test.wav",  
+  "groundTruthTranscriptFilePath": "./input/transcript-ground-truth.txt",
+  "competitorTranscriptFilePath": "./input/transcript-competitor.txt",
+
+  "watsonRawTranscriptFilePath": "./output/transcript-watson-raw.json",
+  "watsonCleanTranscriptFilePath": "./output/transcript-watson-clean.txt",
+  
+  "reportTemplateFilePath": "./report-template.html",
+  "reportFilePath": "./output/report.html" 
+}
